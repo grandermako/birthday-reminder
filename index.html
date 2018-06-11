@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+
+  <title>Birthday Reminder</title>
+  <meta name="description" content="">
+  <meta name="vieport" content="width-device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <meta name="author" content="Patryk Makowiak">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+	<style>
+	html,body
+	{
+		background-color: #F2F2F2;
+		font-family: 'Ubuntu', sans-serif;
+		height: 350px;
+		margin: 0;
+		width: 400px;
+	}
+	.msgEmpty
+	{
+		text-align: center;
+	}
+	.msgEmpty i
+	{
+		font-size: 48px;
+	}
+	.icon-bar 
+	{
+		width: 100%; /* Full-width */
+		overflow: auto; /* Overflow due to float */
+		color: #ffffff;
+		background-color: #01406C;
+	}
+	.icon-bar a
+	{
+		box-sizing: border-box;
+		float: left; /* Float links side by side */
+		text-align: center; /* Center-align text */
+		width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+		padding: 12px 0; /* Some top and bottom padding */
+		transition: all 0.3s ease; /* Add transition for hover effects */
+		color: white; /* White text color */
+		font-size: 24px; 
+	}
+	.icon-bar a:not(.active):hover 
+	{
+		background-color: #00305B; /* Add a hover color */
+	}
+	.active 
+	{
+		background-color: #0B2240; /* Add an active/current color */
+	}
+	h1
+	{	
+		font-size: 26px;
+		text-align: center;
+		margin: 0;
+		padding: 10px 5px;
+	}
+	h2
+	{
+		font-size: 18px;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	h3
+	{
+		text-align: center;
+		font-size: 14px;
+		margin: 0;
+	}
+	p
+	{
+		text-align: center;
+		margin: 3px 0;
+		font-size: 14px;
+	}
+	table
+	{
+		width: 70%;
+	}
+	.desc
+	{
+		padding-bottom: 10px;
+	}
+	.scrollListY
+	{
+		margin: 5px 0;
+		padding: 5px 0;
+		overflow-y: scroll;
+		height: 190px;
+		box-sizing: border-box;
+		background-color: #F5F5F5;
+	}
+	.scrollListY p
+	{
+		font-size: 16px;
+		text-align: left;
+		padding: 4px 5px;
+	}
+	.diffrentColor
+	{
+		background-color: #D9D9D9;
+	}
+	.action
+	{
+		display: none;
+		min-height: 250px;
+		padding: 15px 0;
+	}
+	input
+	{
+		display: block;
+		margin-bottom: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 5px;
+		box-sizing: border-box;
+		width: 200px;
+		height: 30px;
+	}
+	{
+	}
+	input[type="submit"]
+	{
+		font-weight: bold;
+		padding: 5px;
+		width: 100px;
+		background-color: #01406C;
+		color: #fff;
+		border-radius: 25px;
+		border: 1px solid #fff;
+		cursor: pointer;
+	}
+	select
+	{	
+		display: block;
+		width: 300px;
+		margin-bottom: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	::placeholder
+	{
+		color: #000000;
+	}
+	.danger
+	{
+		color: #FB5554;
+	}
+	.warning
+	{
+		color: #A635F9;
+	}
+	#info 
+	{
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	#info p
+	{ 
+		margin-top: 0;
+	}
+	.social
+	{
+		text-align: center;
+		font-size: 24px;
+	}
+	.social a:link, .social a:visited,
+	.social a:active 
+	{
+		color: #000;
+		text-decoration: none;
+	}
+	a.facebook:hover
+	{
+		color: #3b5998;
+	}
+	a.google-plus:hover
+	{
+		color: #d34836;
+	}
+	a.website:hover
+	{
+		color: #3DB296;
+	}
+	#panel
+	{
+		text-align: center;
+	}
+	margin-bottom: 0;
+	}
+	#panel a:link, #panel a:visited,
+	#panel a:hover, #panel a:active,
+	#registration a:link, #registration a:visited,
+	#registration a:hover, #registration a:active 
+	{
+		color: #01406C;
+		text-decoration: none;
+	}
+	.footer
+	{
+		font-size: 11px;
+		color: #A0A0A0;
+	}
+	.footer p
+	{
+		padding-right: 5px;
+		text-align: right;
+		margin: 0;
+	}
+	::-webkit-scrollbar {
+    width: 12px;
+	
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #8AAEBE; 
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background-color: #01406C; 
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background-color: #00305B; 
+	}
+	</style>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<h1>Birthday Reminder</h1>
+	<div class="icon-bar">
+		<a class="link" href="#" id="addLink""><i class="fas fa-user-plus"></i></a>
+		<a href="#" class="link" id="delLink"><i class="fas fa-user-times"></i></a>		
+		<a href="#"  class="link" id="defaultOpen"><i class="fas fa-users"></i></a> 
+		<a href="#" class="link" id="infoLink"><i class="fas fa-info-circle"></i></a>
+		<a href="#" class="link" id="panelLink"><i <i class="fas fa-birthday-cake"></i></a> 
+	</div>
+	<div class="action" id="add"> 
+		<div class="desc">
+			<h2>Write the details of the person you want to remeber about</h2>
+		</div>
+	<form action="" method="post" name="addNewPerson">
+	<input type="text" name="name" placeholder="Name">
+	<input type="text" name="surname" placeholder="Surname">
+	<input type="date" name="bday">
+	<input id="addNP"type="submit" value="Add">
+	</form>
+	</div>
+	<div class="action" id="delete">
+		<div class="desc">
+			<h2>If you don't want reminders about birthday</h2>
+			<h3>remove person from list</h3>
+		</div>
+		<form name="formRemove">
+			<select id="listSelect" name="personList" size="8" >
+			</select>
+			<input type="submit" id="removeP" name="removePerson" value="Remove">
+		</form>
+	</div>
+	<div class="action" id="show"> 
+		<div class="desc">
+			<h2>Your family and friends list</h2>
+		</div>
+		<div class="msgEmpty" id="status" name="status">
+			<p>Your list is currently empty</p>
+			<i class="far fa-frown"></i>
+		</div>
+	</div>
+	<div class="action" id="info"> 
+		<div class="desc">
+		<h2>Birthday Reminder</h2>
+		<p>version: 1.0.0</p> 
+		</div>
+		<h3>Keyboard shortcut:</h3>
+		<p>Open/Close: Ctrl+Shift+F</p>
+		<div class="social">
+		<a href="https://plus.google.com/106722911156142495449" target="_blank" class="facebook"><i class="fab fa-google-plus-square"></i></a>
+		<a href="http://micreate.pl/" target="_blank" class="website"><i class="fas fa-laptop"></i></a>
+		<a href="https://www.facebook.com/micreatepl/" target="_blank" class="google-plus"><i class="fab fa-facebook-square"></i></a>
+		</div>		
+	</div>
+	<div class="action" id="panel"> 
+		<div class="desc">
+		<h2>How many days have been left to birthday:</h2>
+		</div>
+		<div id="statusLeft">
+		
+		</div>
+	</div>
+	<div class="footer">
+		<p>Created by Patryk Makowiak &copy;2018</p>
+	</div>
+<script src="js/script.js"></script>
+</body>
+</html>
